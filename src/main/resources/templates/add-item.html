@@ -2,16 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head th:include="/fragments/head :: head"></head>
 <body>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6" style="text-align:center;">
-            <h1>Add item</h1>
+<div id="addItemVue">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6" style="text-align:center;">
+                <h1>Add item</h1>
 
-            <a th:href="@{/add}">here</a>
+                <form action="#" th:action="@{/greeting}" th:object="${greeting}" method="post">
+                    <p>Id: <input type="text" th:field="*{id}" /></p>
+                    <p>Message: <input type="text" th:field="*{content}" /></p>
+                    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+                </form>
+
+                <a th:href="@{/add}">here</a>
+            </div>
         </div>
     </div>
 </div>
 <div th:include="/fragments/foot :: foot"></div>
+<script type="application/javascript" src="/js/addItem.js"></script>
 </body>
 </html>
