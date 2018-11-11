@@ -2,6 +2,8 @@ package pet.project.dao;
 
 import pet.project.model.FoodPlace;
 
+import java.util.List;
+
 public interface FoodPlaceDAO {
 
     boolean foodPlaceExists(String name, String address);
@@ -14,4 +16,7 @@ public interface FoodPlaceDAO {
 
     FoodPlace getPlaceByID(int id);
 
+    List getPlaces();
+
+    boolean update(FoodPlace foodPlace);
 }
