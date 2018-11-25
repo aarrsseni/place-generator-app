@@ -5,10 +5,7 @@ import org.springframework.stereotype.Service;
 import pet.project.model.FoodPlace;
 import pet.project.model.Person;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class DefaultGeneratorService implements GeneratorService {
@@ -35,5 +32,27 @@ public class DefaultGeneratorService implements GeneratorService {
             resultPlaces.addAll(personService.getPlacesByPerson(id));
         }
         return (FoodPlace) resultPlaces.toArray()[random.nextInt(resultPlaces.size())];
+    }
+
+    @Override
+    public FoodPlace generateForPersonByMark(int id) {
+        Person person = personService.getPersonById(id);
+        List places = person.getPlaces();
+        FoodPlace foodPlace = (FoodPlace) places.get(0);
+        for(int i = 0; i < places.size(); i++) {
+            if(((FoodPlace)places.get(i)).getFeedback() > foodPlace.getFeedback()) {
+                foodPlace = (FoodPlace)places.get(i);
+            }
+        }
+        return foodPlace;
+    }
+
+    @Override
+    public FoodPlace generateForPersonsByMark(List<Integer> ids) {
+        List<FoodPlace> foodPlaces = new ArrayList<>();
+        for(Integer id : ids) {
+            foodPlaces.add(generateForPersonByMark(id));
+        }
+        return foodPlaces.get(random.nextInt(foodPlaces.size()));
     }
 }

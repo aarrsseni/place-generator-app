@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import pet.project.model.FoodPlace;
 import pet.project.service.GeneratorService;
 
-import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -25,5 +24,15 @@ public class GeneratorController {
     @RequestMapping(value = "/getRandomPlaceForPersons", method = RequestMethod.GET)
     public FoodPlace getRandomPlaceForPersons(@RequestParam("persons") List<Integer> ids) {
         return generatorService.generateForPersons(ids);
+    }
+
+    @RequestMapping(value = "/getPlaceByMark", method = RequestMethod.GET)
+    public FoodPlace getPlaceByMark(@RequestParam("person-id") int personId) {
+        return generatorService.generateForPersonByMark(personId);
+    }
+
+    @RequestMapping(value = "/getPlaceByMarkForPersons", method = RequestMethod.GET)
+    public FoodPlace gePlaceByMarkForPersons(@RequestParam("persons") List<Integer> ids) {
+        return generatorService.generateForPersonsByMark(ids);
     }
 }
